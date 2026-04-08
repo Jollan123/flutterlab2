@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lab2/widgets/ingredient_control.dart';
 import 'package:lab2/widgets/kitchen_control.dart';
+import 'package:lab2/widgets/difficulty_control.dart';
+import 'package:lab2/widgets/price_control.dart';
+import 'package:lab2/widgets/time_control.dart';
+
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -11,8 +15,6 @@ Widget build(BuildContext context) {
      body: Row(children: [_controlPanel(context), _recipeArea(context)]),
    );
 }
-
-
 
 
 Widget _controlPanel(context, {double width = 320}) {
@@ -35,7 +37,6 @@ children: [
         ),
 
         SizedBox(height: 16),
-
         Row(
           children: [
             Text("Kök: "),
@@ -43,7 +44,33 @@ children: [
             KitchenControl(),
           ],
         ),
-      ],
+         SizedBox(height: 16),
+        Column(children: [Text("Svårighetsgrad: ")]),
+
+        Row(
+          children: [
+          SizedBox(width: 8),
+          SizedBox(
+          width: 200,
+          child: DifficultyControl(),
+        ),
+          ],
+        ),
+        Column(
+          children: [
+          SizedBox(height: 16),
+          Text("Maxpris:"),
+          PriceControl()]),
+
+          Column(
+            children: [
+              SizedBox(width: 8),
+              Text("Maxtid: "),
+               TimeControl(),
+            ]
+          )
+  
+        ],
     ),
   );
 }
