@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab2/util/main_ingredient.dart';
-
+import 'package:lab2/model/recipe_database/recipe_handler.dart';
+import 'package:provider/provider.dart';
 
 
 class IngredientControl extends StatelessWidget {
@@ -8,6 +9,7 @@ class IngredientControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var recipeHandler = Provider.of<RecipeHandler>(context, listen: false);
 
     const labels = MainIngredient.labels;
 
@@ -23,7 +25,10 @@ class IngredientControl extends StatelessWidget {
            label: labels[i],
         ),
       ],
-      onSelected: (value){},
+     onSelected: (value){
+    recipeHandler.setMainIngredient(value);
+     }
     );
+   
   }
 }
