@@ -1,40 +1,98 @@
+// import 'package:flutter/material.dart';
+// import 'package:lab2/app_theme.dart';
+// import 'package:lab2/util/difficulty.dart';
+// import 'package:lab2/model/recipe_database/recipe_handler.dart';
+// import 'package:provider/provider.dart';
+
+
+// class DifficultyControl extends StatefulWidget {
+//    const DifficultyControl({super.key});
+
+//    @override
+//    State<DifficultyControl> createState() => _DifficultyControlState();
+// }
+
+// class _DifficultyControlState extends State<DifficultyControl> {
+//  String _difficulty = Difficulty.labels[0];
+//  @override
+// Widget build(BuildContext context) {
+//   var recipeHandler = Provider.of<RecipeHandler>(context, listen: false);
+
+//   return RadioGroup<String>(
+//     groupValue: _difficulty,
+//     onChanged: (value) {
+//       setState(() {
+//         _difficulty = value!;
+//       });
+//       recipeHandler.setDifficulty(value!);
+//     },
+//     child: Column(
+//       children: [
+//         for (int i = 0; i < Difficulty.labels.length; i++)
+//           RadioListTile<String>(
+//             dense: true,
+//             value: Difficulty.labels[i],
+//             title: i == 0
+//                 ? Text(Difficulty.labels[i])
+//                 : Row(
+//                     children: [
+//                       Icon(Difficulty.icons[i]),
+//                       SizedBox(width: AppTheme.paddingMedium),
+//                       Text(Difficulty.labels[i]),
+//                     ],
+//                   ),
+//           ),
+//       ],
+//     ),
+//   );
+// }
+// }
 import 'package:flutter/material.dart';
+import 'package:lab2/app_theme.dart';
 import 'package:lab2/util/difficulty.dart';
 import 'package:lab2/model/recipe_database/recipe_handler.dart';
 import 'package:provider/provider.dart';
 
-
 class DifficultyControl extends StatefulWidget {
-   const DifficultyControl({super.key});
+  const DifficultyControl({super.key});
 
-   @override
-   State<DifficultyControl> createState() => _DifficultyControlState();
+  @override
+  State<DifficultyControl> createState() => _DifficultyControlState();
 }
 
 class _DifficultyControlState extends State<DifficultyControl> {
- String _difficulty = Difficulty.labels[0];
-   @override
+  String _difficulty = Difficulty.labels[0];
+
+  @override
   Widget build(BuildContext context) {
     var recipeHandler = Provider.of<RecipeHandler>(context, listen: false);
+
     return RadioGroup<String>(
       groupValue: _difficulty,
       onChanged: (value) {
         setState(() {
           _difficulty = value!;
         });
-          recipeHandler.setDifficulty(value!);
+        recipeHandler.setDifficulty(value!);
       },
       child: Column(
         children: [
-          for (final label in Difficulty.labels)
+          for (int i = 0; i < Difficulty.labels.length; i++)
             RadioListTile<String>(
               dense: true,
-              title: Text(label),
-              value: label,
+              value: Difficulty.labels[i],
+              title: i == 0
+                  ? Text(Difficulty.labels[i]) // ingen ikon
+                  : Row(
+                      children: [
+                        Difficulty.icons[i]!, // Image istället för Icon
+                        SizedBox(width: AppTheme.paddingMedium),
+                        Text(Difficulty.labels[i]),
+                      ],
+                    ),
             ),
         ],
       ),
     );
-    }
   }
-  
+}
